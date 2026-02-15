@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sinhala Sign Language Translator</title>
+    <title>Sinhala Sign Language Translator - Medical</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<h2>Sinhala Sign Language Prediction</h2>
+<h2><i class="fas fa-stethoscope"></i> Sinhala Sign Language Medical Translator</h2>
 
 <div class="container">
     <!-- Left: live webcam -->
@@ -15,16 +16,40 @@
         <div class="progress-container">
             <div id="progressBar"></div>
         </div>
-        <button id="recordBtn">Record 2-sec Video</button>
+        <button id="recordBtn">
+            <i class="fas fa-circle"></i> Record 2-sec Video
+        </button>
+        <p class="hint"><i class="fas fa-info-circle"></i> Show the sign clearly to the camera</p>
     </div>
 
     <!-- Right: recorded video preview -->
     <div class="recorded">
-        <video id="recordedVideo" width="200" controls style="display:none;"></video>
+        <h3>Recorded Preview</h3>
+        <video id="recordedVideo" width="320" controls style="display:none;"></video>
+        <p id="previewHint" class="hint"><i class="fas fa-video"></i> No recording yet</p>
     </div>
 </div>
 
-<p id="result"></p>
+<div id="result" class="result-card">
+    <!-- Result will appear here -->
+    <p>Ready to record...</p>
+</div>
+
+<div class="signs-info">
+    <h3><i class="fas fa-list"></i> Available Signs</h3>
+    <div class="signs-grid">
+        <span><i class="fas fa-thermometer-half"></i> උණ</span>
+        <span><i class="fas fa-head-side-brain"></i> ඔළුව රිදෙනවා</span>
+        <span><i class="fas fa-lungs"></i> හුස්ම ගැනීමට අපහසුයි</span>
+        <span><i class="fas fa-heartbeat"></i> පපුව රිදෙනවා</span>
+        <span><i class="fas fa-stomach"></i> බඩ රිදෙනවා</span>
+        <span><i class="fas fa-dizzy"></i> ක්ලාන්තය</span>
+        <span><i class="fas fa-bone"></i> අත් කැඩිලා</span>
+        <span><i class="fas fa-allergies"></i> අසාත්මිකතා</span>
+        <span><i class="fas fa-vomit"></i> වමනය</span>
+        <span><i class="fas fa-throat"></i> උගුර රිදෙනවා</span>
+    </div>
+</div>
 
 <script src="/static/script.js"></script>
 </body>

@@ -1,40 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+h2 {
     text-align: center;
-    margin-top: 20px;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 32px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+h2 i {
+    margin-right: 10px;
 }
 
 .container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 50px;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .live, .recorded {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.live {
+    flex: 2;
+    min-width: 450px;
+}
+
+.recorded {
+    flex: 1;
+    min-width: 350px;
+}
+
+.recorded h3 {
+    margin-bottom: 15px;
+    color: #667eea;
+}
+
+video {
+    border-radius: 10px;
+    background: #f0f0f0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 button {
-    margin-top: 10px;
-    padding: 10px 20px;
+    margin-top: 15px;
+    padding: 12px 30px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s;
+    width: 100%;
+    max-width: 300px;
 }
 
-#result {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 18px;
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button i {
+    margin-right: 8px;
 }
 
 .progress-container {
-    width: 420px;
+    width: 100%;
     height: 10px;
-    background-color: #ddd;
-    margin-top: 10px;
+    background-color: #e0e0e0;
+    margin-top: 15px;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -42,6 +106,112 @@ button {
 #progressBar {
     width: 0%;
     height: 100%;
-    background-color: #4caf50;
+    background: linear-gradient(90deg, #4caf50, #8bc34a);
     transition: width 0.1s linear;
+}
+
+.result-card {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    font-size: 18px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint {
+    color: #666;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.hint i {
+    margin-right: 5px;
+    color: #667eea;
+}
+
+.signs-info {
+    max-width: 800px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.signs-info h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.signs-info h3 i {
+    margin-right: 8px;
+}
+
+.signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.signs-grid span {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-size: 14px;
+    color: #495057;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.signs-grid span:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.signs-grid span i {
+    margin-right: 8px;
+    color: #667eea;
+}
+
+.signs-grid span:hover i {
+    color: white;
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .live, .recorded {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    video {
+        width: 100%;
+        height: auto;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
 }

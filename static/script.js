@@ -3,6 +3,7 @@ const recordedVideo = document.getElementById("recordedVideo");
 const recordBtn = document.getElementById("recordBtn");
 const progressBar = document.getElementById("progressBar");
 const resultText = document.getElementById("result");
+const previewHint = document.getElementById("previewHint");
 
 let mediaRecorder;
 let chunks = [];
@@ -21,24 +22,44 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         chunks = [];
 
         // Show recorded video on right
-        recordedVideo.src = URL.createObjectURL(blob);
+        const url = URL.createObjectURL(blob);
+        recordedVideo.src = url;
         recordedVideo.style.display = "block";
-
-        const file = new File([blob], "recorded.webm", { type: "video/webm" });
+        if (previewHint) previewHint.style.display = "none";
+        
+        // Create file and upload
+        const file = new File([blob], "recorded_" + Date.now() + ".webm", { 
+            type: "video/webm" 
+        });
 
         uploadVideo(file);
-    }
+        
+        // Clean up URL after video is loaded
+        recordedVideo.onloadeddata = () => {
+            URL.revokeObjectURL(url);
+        };
+    };
 })
 .catch(err => {
     alert("Could not access webcam: " + err);
+    console.error("Webcam error:", err);
 });
 
 // Record 2 seconds
 recordBtn.onclick = () => {
-    if (!mediaRecorder) return;
+    if (!mediaRecorder) {
+        alert("Camera not initialized yet");
+        return;
+    }
 
-    resultText.innerText = "Recording...";
+    // Reset UI
+    resultText.innerHTML = "Recording...";
     progressBar.style.width = "0%";
+    recordBtn.disabled = true;
+    recordBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Recording...';
+    
+    // Start recording
+    chunks = [];
     mediaRecorder.start();
 
     let start = Date.now();
@@ -51,7 +72,9 @@ recordBtn.onclick = () => {
     setTimeout(() => {
         mediaRecorder.stop();
         clearInterval(interval);
-        resultText.innerText = "Predicting...";
+        resultText.innerHTML = "Predicting...";
+        recordBtn.disabled = false;
+        recordBtn.innerHTML = '<i class="fas fa-circle"></i> Record 2-sec Video';
     }, 2000);
 };
 
@@ -60,11 +83,48 @@ function uploadVideo(file) {
     const formData = new FormData();
     formData.append("video", file);
 
-    fetch("/predict", { method: "POST", body: formData })
-    .then(res => res.json())
-    .then(data => {
-        if (data.error) resultText.innerText = data.error;
-        else resultText.innerText = `Prediction: ${data.prediction} (${data.confidence}%)`;
+    fetch("/predict", { 
+        method: "POST", 
+        body: formData 
     })
-    .catch(() => resultText.innerText = "Prediction failed");
+    .then(res => {
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+    })
+    .then(data => {
+        if (data.error) {
+            resultText.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${data.error}`;
+        } else {
+            // Determine confidence color
+            let confidenceColor = "#28a745";
+            if (data.confidence < 70) confidenceColor = "#ffc107";
+            if (data.confidence < 50) confidenceColor = "#dc3545";
+            
+            resultText.innerHTML = `
+                <div style="font-size: 32px; color: #667eea; margin-bottom: 10px;">
+                    ${data.prediction}
+                </div>
+                <div style="font-size: 18px;">
+                    <i class="fas fa-check-circle" style="color: ${confidenceColor};"></i>
+                    Confidence: ${data.confidence}%
+                </div>
+                <div style="font-size: 14px; color: #666; margin-top: 10px;">
+                    (${data.english_label})
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        resultText.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Prediction failed: ${error.message}`;
+    });
 }
+
+// Add keyboard support
+document.addEventListener('keypress', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+        recordBtn.click();
+    }
+});
