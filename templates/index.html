@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sinhala Sign Language Translator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Sinhala Sign Language Prediction</h2>
+
+<div class="container">
+    <!-- Left: live webcam -->
+    <div class="live">
+        <video id="liveVideo" width="420" autoplay muted></video>
+        <div class="progress-container">
+            <div id="progressBar"></div>
+        </div>
+        <button id="recordBtn">Record 2-sec Video</button>
+    </div>
+
+    <!-- Right: recorded video preview -->
+    <div class="recorded">
+        <video id="recordedVideo" width="200" controls style="display:none;"></video>
+    </div>
+</div>
+
+<p id="result"></p>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
