@@ -5,189 +5,302 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(145deg, #0b2b40 0%, #1b4f6e 100%);
     min-height: 100vh;
-    padding: 20px;
-    color: #333;
+    padding: 24px;
+    color: #e8f0fe;
+    line-height: 1.5;
 }
 
+/* main header with medical touch */
 h2 {
     text-align: center;
     color: white;
-    margin-bottom: 30px;
-    font-size: 32px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-}
-
-h2 i {
-    margin-right: 10px;
-}
-
-.container {
+    margin-bottom: 36px;
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    text-shadow: 0 8px 16px rgba(0, 20, 30, 0.6);
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 14px;
     flex-wrap: wrap;
 }
 
+h2 i {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border-radius: 60px;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+}
+
+/* main container — soft card with depth */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto 30px;
+    flex-wrap: wrap;
+}
+
+/* live + recorded cards */
 .live, .recorded {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    padding: 24px;
+    border-radius: 36px;
+    box-shadow: 0 30px 50px -10px rgba(0, 35, 55, 0.5),
+                inset 0 1px 2px rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: all 0.2s ease;
 }
 
 .live {
     flex: 2;
-    min-width: 450px;
+    min-width: 460px;
 }
 
 .recorded {
     flex: 1;
-    min-width: 350px;
+    min-width: 360px;
+    justify-content: flex-start;
 }
 
 .recorded h3 {
-    margin-bottom: 15px;
-    color: #667eea;
+    margin-bottom: 16px;
+    color: #0f4c6b;
+    font-weight: 600;
+    font-size: 1.6rem;
+    border-left: 6px solid #2b95c6;
+    padding-left: 16px;
 }
 
+/* video elements */
 video {
-    border-radius: 10px;
-    background: #f0f0f0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 24px;
+    background: #102b36;
+    box-shadow: 0 20px 30px -8px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: auto;
+    border: 3px solid rgba(255,255,240,0.7);
+    transition: transform 0.3s;
 }
 
+video:hover {
+    transform: scale(1.01);
+}
+
+/* record button – pill with pulse */
 button {
-    margin-top: 15px;
-    padding: 12px 30px;
-    font-size: 16px;
-    font-weight: bold;
+    margin-top: 22px;
+    padding: 16px 32px;
+    font-size: 1.25rem;
+    font-weight: 700;
     cursor: pointer;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(115deg, #1f7a9c, #0b4f6c);
     color: white;
     border: none;
-    border-radius: 50px;
-    transition: all 0.3s;
+    border-radius: 60px;
+    transition: all 0.25s;
     width: 100%;
-    max-width: 300px;
-}
-
-button:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-}
-
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+    max-width: 340px;
+    letter-spacing: 0.8px;
+    box-shadow: 0 8px 0 #083344, 0 12px 24px -8px #082b36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
 button i {
-    margin-right: 8px;
+    font-size: 1.3rem;
 }
 
+button:hover:not(:disabled) {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 0 #083344, 0 20px 30px -6px #021218;
+    background: linear-gradient(115deg, #2687ad, #136381);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 #083344, 0 12px 24px -8px black;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+/* progress bar – medical monitor feel */
 .progress-container {
     width: 100%;
-    height: 10px;
-    background-color: #e0e0e0;
-    margin-top: 15px;
-    border-radius: 5px;
+    height: 14px;
+    background-color: #d3e2e9;
+    margin: 20px 0 8px;
+    border-radius: 40px;
     overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
 }
 
 #progressBar {
     width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #4caf50, #8bc34a);
-    transition: width 0.1s linear;
+    background: linear-gradient(90deg, #32c48d, #1f9d8a, #166b7a);
+    transition: width 0.1s cubic-bezier(0.2, 0.9, 0.3, 1);
+    border-radius: 40px;
+    box-shadow: 0 0 12px #3fe0b2;
 }
 
+/* result card – like a doctor's monitor */
 .result-card {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 900px;
+    margin: 20px auto 30px;
+    padding: 36px 28px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 48px;
+    box-shadow: 0 25px 45px -12px #00161f;
     text-align: center;
-    font-size: 18px;
-    min-height: 150px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    min-height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid rgba(255,255,255,0.9);
+    color: #064663;
+    line-height: 1.4;
+    word-break: break-word;
 }
 
+.result-card p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.result-card i {
+    font-size: 2.5rem;
+    color: #1b7f9e;
+}
+
+/* hint text + icons */
 .hint {
-    color: #666;
-    margin-top: 10px;
-    font-size: 14px;
+    color: #254e5c;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: rgba(210, 235, 245, 0.7);
+    padding: 8px 18px;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(4px);
+    border: 1px solid white;
 }
 
 .hint i {
-    margin-right: 5px;
-    color: #667eea;
+    color: #0c6b8a;
+    font-size: 1.1rem;
 }
 
+/* recorded preview hint */
+#previewHint {
+    background: #e1eff5;
+    padding: 15px 20px;
+    border-radius: 60px;
+    margin-top: 25px;
+    font-size: 1rem;
+}
+
+/* signs info – grid of medical terms */
 .signs-info {
-    max-width: 800px;
-    margin: 30px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 1100px;
+    margin: 30px auto 10px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 30px 30px;
+    border-radius: 50px;
+    box-shadow: 0 20px 40px -10px #02121f;
+    border: 1px solid rgba(255,255,255,0.7);
 }
 
 .signs-info h3 {
-    color: #667eea;
-    margin-bottom: 20px;
+    color: #115e7a;
+    font-size: 2rem;
+    margin-bottom: 28px;
     text-align: center;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
 }
 
 .signs-info h3 i {
-    margin-right: 8px;
+    background: #167e9e;
+    color: white;
+    padding: 12px;
+    border-radius: 60px;
 }
 
 .signs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
 }
 
 .signs-grid span {
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 50px;
-    font-size: 14px;
-    color: #495057;
-    transition: all 0.3s;
+    background: #f6fbfe;
+    padding: 16px 16px;
+    border-radius: 60px;
+    font-size: 1.05rem;
+    font-weight: 550;
+    color: #05262f;
+    transition: all 0.25s;
     text-align: center;
-}
-
-.signs-grid span:hover {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    transform: translateY(-2px);
+    border: 2px solid rgba(28, 126, 156, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 30, 40, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    backdrop-filter: blur(2px);
 }
 
 .signs-grid span i {
-    margin-right: 8px;
-    color: #667eea;
+    color: #1a7f9c;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+.signs-grid span:hover {
+    background: linear-gradient(125deg, #1d6d8f, #0b506e);
+    color: white;
+    transform: translateY(-5px) scale(1.02);
+    border-color: white;
+    box-shadow: 0 20px 25px -8px #022b38;
 }
 
 .signs-grid span:hover i {
     color: white;
+    filter: drop-shadow(0 2px 2px black);
 }
 
-.fa-spinner {
-    animation: spin 1s linear infinite;
+/* loading spinner (if any) */
+.fa-spinner, .fa-circle-notch {
+    animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -195,23 +308,68 @@ button i {
     100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .live, .recorded {
-        width: 100%;
-        min-width: auto;
-    }
-    
-    video {
-        width: 100%;
-        height: auto;
-    }
-    
-    h2 {
-        font-size: 24px;
-    }
+/* responsive adjustments */
+@media (max-width: 800px) {
+    body { padding: 16px; }
+    h2 { font-size: 2rem; }
+    .live, .recorded { min-width: auto; width: 100%; }
+    .live { padding: 20px; }
+    .recorded { padding: 20px; }
+    .result-card { font-size: 1.4rem; padding: 28px 20px; }
+    .signs-info { padding: 20px; }
+    .signs-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+@media (max-width: 480px) {
+    h2 { font-size: 1.7rem; flex-direction: column; gap: 6px; }
+    h2 i { padding: 10px; }
+    button { max-width: 100%; font-size: 1.1rem; }
+    .signs-grid span { font-size: 0.9rem; padding: 12px; }
+    .result-card { font-size: 1.2rem; border-radius: 32px; }
+}
+
+/* extra polish for live/recorded separation */
+.live video {
+    border: 4px solid #84d1f3;
+}
+
+.recorded video {
+    border: 4px solid #73b9d1;
+}
+
+/* medical stethoscope bullet */
+.fa-stethoscope {
+    filter: drop-shadow(0 4px 4px #0a3442);
+}
+
+/* smooth entrance */
+.container, .result-card, .signs-info {
+    animation: fadeScale 0.5s ease-out;
+}
+
+@keyframes fadeScale {
+    0% { opacity: 0.5; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* sinhala text support */
+.signs-grid span, .result-card, .hint {
+    font-family: 'Segoe UI', 'Poppins', 'Iskoola Pota', 'Noto Sans Sinhala', sans-serif;
+}
+
+/* progress bar tooltip style */
+#progressBar::after {
+    content: '';
+    position: relative;
+    display: block;
+}
+
+/* small visual touch for result placeholder */
+#result p i {
+    opacity: 0.8;
+}
+
+/* disabled button better contrast */
+button:disabled i {
+    opacity: 0.7;
 }
